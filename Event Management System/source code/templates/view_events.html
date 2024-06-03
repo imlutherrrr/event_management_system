@@ -1,0 +1,84 @@
+{% if session['role'] == 'admin' %}
+    {% include "admin_head.html" %}
+{% elif session['role'] == 'event_host' %}
+    {% include "event_host_head.html" %}
+{% elif session['role'] == 'customer' %}
+    {% include "customer_head.html" %}
+{% else %}
+    {% include "main_head.html" %}
+{% endif %}
+<script>
+    let btn_selected = 'today'
+    function setClass(btn_type){
+        $("#btn1").removeClass("bg-success");
+        $("#btn2").removeClass("bg-success");
+        $("#btn3").removeClass("bg-success");
+        $("#btn1").addClass("bg-secondary");
+        $("#btn2").addClass("bg-secondary");
+        $("#btn3").addClass("bg-secondary");
+        if (btn_type == 'history'){
+            btn_selected = 'history'
+            $("#btn1").addClass("bg-success")
+        }else if (btn_type == 'today'){
+            btn_selected = 'today'
+            $("#btn2").addClass("bg-success")
+        }else if (btn_type == 'future'){
+            btn_selected = 'future'
+            $("#btn3").addClass("bg-success")
+        }
+        get_events()
+    }
+
+    function get_events(){
+        let event_type_id = $("#event_type_id").val()
+        let event_title = $("#event_title").val()
+        let url = "http://127.0.0.1:5000/get_events?event_type_id="+event_type_id+"&event_title="+event_title+"&btn_selected="+btn_selected
+        $.get(url,function(data,status){
+            $("#events").html(data)
+        });
+    }
+
+    $(document).ready(function(){
+        get_events();
+        $("#event_type_id").on('change',function(){
+            get_events();
+        })
+        $("#event_title").on("keyup",function(){
+            get_events();
+        })
+    });
+
+
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 mt-2">
+            <label for="event_type_id" class="form-label">EVENT TYPE</label>
+            <select id="event_type_id" name="event_type" class="form-control">
+                {% for event_type in event_types %}
+                <option value="" hidden>-->Choose Type<--</option>
+                <option value="{{event_type[0]}}">{{event_type[1]}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4 mt-2">
+            <label for="event_title" class="form-label">Search Event</label>
+            <input type="search" name="event_title" id="event_title" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4 ">
+                    <button id="btn1" value="history" onclick="setClass('history')" class="btn btn-secondary w-100 mt-5">History</button>
+                </div>
+                <div class="col-md-4 ">
+                    <button id="btn2" value="today" onclick="setClass('today')" class="btn btn-success w-100 mt-5">Today</button>
+                </div>
+                <div class="col-md-4 ">
+                    <button id="btn3" value="future" onclick="setClass('future')" class="btn btn-secondary w-100 mt-5">Future</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="events"></div>

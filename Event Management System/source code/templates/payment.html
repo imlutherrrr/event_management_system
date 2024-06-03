@@ -1,0 +1,86 @@
+{% include "customer_head.html" %}
+<script>
+    function validate(){
+        var regex_care_name = /^[a-zA-Z ]*$/;
+        let card_name = document.getElementById("card_holder_name").value
+        if(!regex_care_name.test(card_name)){
+            alert("Invalid Name on Card")
+            return false
+        }
+
+        let card_number = document.getElementById("card_number").value
+        if(card_number.length!=16){
+            alert("Card Number Should be 16")
+            return false
+        }
+
+
+        let cvv = document.getElementById("cvv").value
+        if(cvv.length!=3){
+            alert("Invalid CVV")
+            return false
+        }
+
+
+
+        var expire = document.getElementById("expiry_date").value;
+        if(!expire.match(/(0[1-9]|1[0-2])[-][0-9]{2}/)){
+              alert('Expiry date format should be MM-YY')
+              return false;
+        } else {
+              var d = new Date();
+              var currentYear = d.getFullYear();
+              var currentMonth = d.getMonth() + 1;
+              var parts = expire.split('-');
+              var year = parseInt(parts[1], 10) + 2000;
+              var month = parseInt(parts[0], 10);
+              if (year < currentYear || (year == currentYear && month < currentMonth)) {
+                alert('Card Expired')
+                return false;
+              }
+        }
+
+
+        return true
+    }
+</script>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="card p-3 mt-5">
+                <form action="payment1" method="post" onsubmit="return validate()">
+                    <input type="hidden" id="booking_id" name="booking_id" value="{{booking_id}}">
+                    <input type="hidden" id="payable_amount" name="payable_amount" value="{{payable_amount}}">
+                    <h4 class="text-center">Payment Details</h4>
+                    <div class="mt-5">
+                        <label>Payable Amount:</label>$ {{payable_amount}}
+                    </div>
+                    <div class="mt-3">
+                        <label class="form-label" for="card_holder_name">Card Holder Name</label>
+                        <input type="text" id="card_holder_name" name="card_holder_name" class="form-control">
+                    </div>
+                    <div class="mt-3">
+                        <label class="form-label" for="card_number">Card Number</label>
+                        <input type="number" id="card_number" name="card_number" class="form-control" >
+                    </div>
+                    <div class="mt-3">
+                        <label class="form-label" for="cvv">CVV</label>
+                        <input type="number" id="cvv" name="cvv" class="form-control" >
+                    </div>
+                    <div class="mt-3">
+                        <label class="form-label" for="expiry_date">Expiry Date</label>
+                        <input type="text" id="expiry_date" name="expiry_date" class="form-control">
+                    </div>
+                    <div class="mt-3">
+                        <input type="submit" value="Book Ticket" id="btn" class="btn btn-primary w-100">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

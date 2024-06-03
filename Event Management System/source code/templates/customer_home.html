@@ -1,0 +1,17 @@
+{% include "customer_head.html" %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="customer_card p-5 mt-5">
+                <div class="card-image-top text-center"><img src="../static/customer/{{customer[6]}}" style="max-width:200px;height:200px;border-radius:50%;"></div>
+                <div class="text-center"><b>{{customer[1]}}</b></div>
+                <div><b>Email:</b>{{customer[2]}}</div>
+                <div><b>Phone:</b>{{customer[3]}}</div>
+                <div><b>password:</b>{{customer[4]}}</div>
+                <div><b>Gender:</b>{{customer[5]}}</div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

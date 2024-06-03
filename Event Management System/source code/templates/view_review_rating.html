@@ -1,0 +1,45 @@
+{% include "event_host_head.html" %}
+<div class="container">
+    <div class="row">
+        {% for event in events %}
+        {% set event_host = get_event_host_by_event_host_id(event[8]) %}
+        {% set rating = get_avg_rating_by_event_id(event[0]) %}
+        <div class="col-md-3 mt-5">
+            <div class="rating">
+                <div class="card-image-top text-center"><img src="../static/event/{{event[1]}}" style="max-width:100%;height:170px;"></div>
+                <div class="text-center"><b>{{event[2]}}</b></div>
+                <div class="text-center">{{event[3]}}</div>
+                <div class="text-center"><strong>Average Rating</strong></div>
+                <div class="text-center">{{rating[0]}}</div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-md-9">
+            <h3 class="text-center">Reviews and Ratings</h3><hr>
+            {% for review in reviews %}
+            {% set booking = get_customer_id_by_booking_id(review[4])%}
+            {% set customer = get_customer_by_customer_id(booking[11])%}
+            <div class="card p-3 mt-5">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Customer Name:</label>
+                        {{customer[1]}}
+                    </div>
+                    <div class="col-md-3">
+                        <label>Review:</label>
+                        {{review[1]}}
+                    </div>
+                    <div class="col-md-3">
+                        <label>Rating:</label>
+                        {{review[2]}}
+                    </div>
+                    <div class="col-md-3">
+                        <label>Date:</label>
+                        {{review[3]}}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+{% if session['role'] == 'customer' %}
+    {% include "customer_head.html" %}
+{% elif session['role'] == 'event_host' %}
+    {% include "event_host_head.html" %}
+{% endif %}
+<div class="container">
+    <div class="row">
+        {% for booking in bookings %}
+        {% if booking[8] != 'Payment pending'%}
+        {% set booked_seats = get_booked_seats_by_booking_id(booking[0]) %}
+        {% set event = get_event_by_event_id(booking[9]) %}
+        {% set place = get_place_by_place_id(event[10]) %}
+        {% set customer = get_customer_by_customer_id(booking[11]) %}
+                <div class="col-md-6">
+                <div class="booking p-3">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="h1 text-center">{{event[2]}}</div>
+                            <div class="h5 text-center">{{event[3]}}</div>
+                            {% if session['role'] == 'customer' %}
+                            <div><label>Name:</label>{{customer[1]}}</div>
+                            {% elif session['role'] == 'event_host' %}
+                            <div><label>Customer Name:</label>{{customer[1]}}</div>
+                            {% endif %}
+                            {% if event[11] == 'layout' %}
+                            {% if booked_seats!=None %}
+                                <div><label>SEAT NUMBERS:</label>
+                                    {% for booked_seat in booked_seats %}
+                                        {{booked_seat[2]}}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            {% else %}
+                                <div><label>NUMBER OF TICKETS:</label>{{booking[1]}}</div>
+                            {% endif %}
+                            <div><label>Total Amount:</label>${{booking[6]}}</div>
+                            <div><label>Status:</label>
+                                {% if booking[8] == 'Ticket Cancelled' %}
+                                    <label class="text-danger">{{booking[8]}}</label>
+                                {% elif booking[8] == 'Ticket Booked' %}
+                                    <label class="text-success">{{booking[8]}}</label>
+                                {% endif %}
+                            </div>
+                            <div class="h5 text-center">VENUE: <b>{{place[1]}}</b></div>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="../static/event/{{event[1]}}" style="width:150px;height:150px;border-radius:50%;text-align:center;">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            {% if session['role'] == 'customer' %}
+                            <div class="col-md-5">
+                                <form action="cancel_booking" method="post">
+                                    {% if booking[8] == 'Ticket Booked' %}
+                                    <input type="submit" class="btn btn-danger text-center mt-4 w-100"  id="btn" value="Cancel" >
+                                    <input type="hidden" name="booking_id" value="{{booking[0]}}">
+                                    {% endif %}
+                                </form>
+                            </div>
+                            {% if booking[8] == 'Ticket Booked' %}
+                            <div class="col-md-5">
+                                <form action="review_rating" method="post">
+                                    <input type="submit" class="btn btn-success text-center mt-4 w-100"  id="btn1" value="Review & Rating">
+                                    <input type="hidden" name="booking_id" value="{{booking[0]}}">
+                                </form>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,94 @@
+{% include "customer_head.html" %}
+{% set place = get_place_by_place_id(event[10]) %}
+{% set event_host = get_event_host_by_event_host_id(event[8]) %}
+<input type="hidden" value="{{event[0]}}">
+{% if event[11] == 'non_layout' %}
+    <input type="hidden"  value="{{number_of_tickets}}" class="form-control">
+{% else %}
+    {% for seat in selected_seats %}
+    <input type="hidden"   value="{{seat}}"  class="form-control">
+    {% endfor %}
+{% endif %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 mt-5">
+            <div class="event p-3 mt-5" >
+                <div class="card-image-top text-center"><img src="../static/event/{{event[1]}}" style="max-width:100%;height:200px;"></div>
+                <div class="text-center"><b>{{event[2]}}</b></div>
+                <div><b>Event Date:</b>{{event[3]}}</div>
+                <div><b>Place:</b>{{place[1]}}</div>
+                <div><b>Event host:</b>{{event_host[1]}}</div>
+                <div style="height:60px;"><b>Description:</b>{{event[6]}}</div>
+            </div>
+        </div>
+        <div class="col-md-5 mt-5" >
+            <div class="card p-3 mt-5">
+                <form action="payment" >
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Price per Ticket</label>
+                            <div class="form-control">${{event[7]}}</div>
+                        </div>
+                        {% for booking in bookings %}
+                        <div class="col-md-6 ">
+                            {% if event[11] == 'non_layout' %}
+                                <label>Number of tickets</label>
+                                <input  value="{{number_of_tickets}}" class="form-control">
+                            {% else %}
+                                <b>Seat numbers:</b>
+                                <div class="box">
+                                    {% for seat in selected_seats %}
+                                        {{seat}}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Ticket price</label>
+                            <div class="form-control">${{booking[2]}}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tax</label>
+                            <div class="form-control">${{booking[3]}}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Convenience Fee</label>
+                            <div class="form-control">${{booking[4]}}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Total Amount</label>
+                            <div class="form-control">${{booking[6]}}</div>
+                        </div>
+                        <div class="col-md-12 ">
+                            <label class="form-label">Date</label>
+                            <div class="form-control text-center">{{booking[7]}}</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4 mt-5">
+            <div class="card p-3 mt-5">
+                <form action="bill" method="post">
+                    <input type="hidden" id="booking_id" name="booking_id" value="{{booking[0]}}">
+                    <input type="hidden" id="total_amount" name="total_amount" value="{{booking[6]}}">
+                    <div class="mt-3">
+                        <label for="donations" class="form-label">Donations(optional)</label>
+                        <input type="number" id="donations" name="donations" class="form-control">
+                    </div>
+                    <label for="coupons_id" class="form-label">Coupons</label>
+                    <select id="coupons_id" name="coupons_id" class="form-control">
+                        <option hidden></option>
+                        {% for coupon in coupons %}
+                        <option value="{{coupon[0]}}">{{coupon[1]}}  -  {{coupon[4]}}%</option>
+                        {% endfor %}
+                    </select>
+                    <div class="mt-3">
+                        <input type="submit" value="Apply Coupon" class="btn btn-primary w-100" >
+                    </div>
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+{% include "admin_head.html" %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <table class="table table-bordered">
+                <thead class="table-info">
+                    <tr>
+                        <th>Event Host ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Password</th>
+                        <th>Address</th>
+                        <th>status</th>
+                        <th>profile Picture</th>
+                        <th>Verification</th>
+                    </tr>
+                </thead>
+                <tbody id="view_host">
+                    {% for event_host in event_hosts: %}
+                    <tr>
+                        <td>{{event_host[0]}}</td>
+                        <td>{{event_host[1]}}</td>
+                        <td>{{event_host[2]}}</td>
+                        <td>{{event_host[3]}}</td>
+                        <td>{{event_host[4]}}</td>
+                        <td>{{event_host[5]}}</td>
+                        <td>{{event_host[6]}}</td>
+                        <td><img src="/static/event_host/{{event_host[7]}}" style="max-width:100%;height:50px;"></td>
+                        <td>
+                            {% if event_host[6] == 'Not verified' %}
+                                <a class="btn btn-success" href="verify_host?event_host_id={{event_host[0]}}">Verify</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>

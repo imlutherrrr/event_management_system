@@ -1,0 +1,38 @@
+{% include "admin_head.html" %}
+<script>
+    $(document).ready(function(){
+        get_event_types();
+    })
+    function get_event_types(){
+       let url = "http://127.0.0.1:5000/get_event_types"
+       $.get(url,function(data,status){
+            $("#event_types").html(data)
+       })
+    }
+</script>
+<div class="container">
+    <div class="row">
+        <h4 class="text-center">ADD EVENT TYPE</h4>
+        <form action="add_event_types1" method="post" enctype="multipart/form-data">
+            <div class="col-md-4">
+                <div class="mt-2">
+                    <label for="event_type" class="form-label">Event Type</label>
+                    <input type="text" name="event_type" id="event_type" placeholder="Enter Event Type" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mt-2">
+                    <label for="picture" class="form-label">Event Type Picture</label>
+                    <input type="file" name="picture" id="picture" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mt-5">
+                    <input type="submit" value="ADD EVENT TYPE" id="btn" class="btn btn-primary w-100">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<h4 class="text-center mt-5"><b>EVENT TYPES</b></h4>
+<div id="event_types"></div>

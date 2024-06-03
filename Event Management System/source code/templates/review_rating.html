@@ -1,0 +1,27 @@
+{% include "customer_head.html" %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="card p-3 mt-5">
+                <form action="review_rating1" method="post">
+                    <h4>Review and Rating</h4>
+                    <input type="hidden" id="booking_id" name="booking_id" value="{{booking_id}}">
+                    <div class="mt-3">
+                        <label for="rating" class="form-label">Rating (out of 5)</label>
+                        <input type="number" class="form-control" id="rating" name="rating" placeholder="Enter Rating" required min="1" max="5">
+                    </div>
+                    <div class="mt-3">
+                        <label for="review" class="form-label">Review</label>
+                        <textarea id="review" class="form-control" name="review" placeholder="Review"></textarea>
+                    </div>
+                    <div class="mt-3">
+                        <input type="submit" class="btn btn-primary w-100" id="btn"  value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

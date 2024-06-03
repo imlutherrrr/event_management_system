@@ -1,0 +1,114 @@
+{% include "customer_head.html" %}
+<style>
+    [type="checkbox"]{
+        display: none
+    }
+    .seat-available {
+        display:block;
+        background-color: white;
+        border: 1px solid grey;
+        width:50px;
+        height:50px;
+        padding-top:17px;
+        text-align:center;
+        border-radius:50%;
+        background-image: url("https://cdn-icons-png.flaticon.com/256/1683/1683809.png")
+    }
+    [type="checkbox"]:checked + .seat-available {
+        background-color: green;
+        color:white;
+        background-image: url("")
+    }
+    .seat-booked {
+        display:block;
+        background-color: grey;
+        border: 1px solid grey;
+        width:50px;
+        height:50px;
+        padding-top:17px;
+        border-radius:50%;
+        text-align:center;
+        background-image: url("")
+    }
+</style>
+{% set place = get_place_by_place_id(event[10]) %}
+{% set event_host = get_event_host_by_event_host_id(event[8]) %}
+{% set booked_seats,remaining_seats = get_seats_by_event_id(event[0]) %}
+<div class="container">
+    <div class="row">
+        <form action="book_event_action" method="post">
+            <input type="hidden" id="event_id" name="event_id" value="{{event[0]}}" >
+            <div class="ticket p-3 mt-5 mr-3">
+                <div class="row">
+                    <div class="col-md-1"><img src="../static/event/{{event[1]}}" style="max-width:100%;height:50px;"></div>
+                    <div class="col-md-2"><b>Event Title:</b><br>{{event[2]}}</div>
+                    <div class="col-md-2"><b>Start Time:</b><br>{{event[4]}}</div>
+                    <div class="col-md-2"><b>End Time:</b><br>{{event[5]}}</div>
+                    <div class="col-md-1"><b>Place:</b><br>{{place[1]}}</div>
+                    <div class="col-md-1"><b>Event_host</b><br>{{event_host[1]}}</div>
+                    <div class="col-md-2"><b>Ticket Price</b><br>${{event[7]}}</div>
+                    <div class="col-md-1 mt-2">
+                        <input type="submit" value="Book" name="book" class="btn btn-primary" id="btn">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mt-5">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <label class="form-label">Total Seats:{{event[12]}}</label>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-5">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <label class="form-label">Booked Seats:{{booked_seats}}</label>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-5">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <label class="form-label">Available Seats:{{remaining_seats}} </label>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+            </div>
+            {% if event[11] == 'non_layout' %}
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 mt-5">
+                        <label for="number_of_tickets" class="form-label">Number Of Tickets</label>
+                        <input type="number" id="number_of_tickets" name="number_of_tickets" class="form-control" placeholder="Enter Number" min="1" max="10" required>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            {% else %}
+                <div class="card p-5 mt-3">
+                    <div class="row mt-5">
+                    {% for i in range(1, int(event[12])+1): %}
+                        {% set is_booked = is_seats_booked(i,event[0])%}
+                        {% if is_booked: %}
+                        <div class="col-md-1 ">
+                                <label for="seat_number{{i}}" class="seat-booked">{{i}}</label>
+                        </div>
+                        {% else %}
+                        <div class="col-md-1 ">
+                                <input type="checkbox"   name="seat_number{{i}}" id="seat_number{{i}}" value="{{i}}">
+                                <label for="seat_number{{i}}" class="seat-available">{{i}}</label>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+</div>

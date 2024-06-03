@@ -1,0 +1,18 @@
+{% include "event_host_head.html" %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="host_card p-5 mt-5">
+                <div class="card-image-top text-center"><img src="../static/event_host/{{event_host[7]}}" style="max-width:200px;height:200px;border-radius:50%;"></div>
+                <div class="text-center"><b>{{event_host[1]}}</b></div>
+                <div><b>Email:</b>{{event_host[2]}}</div>
+                <div><b>Phone:</b>{{event_host[3]}}</div>
+                <div><b>password:</b>{{event_host[4]}}</div>
+                <div><b>Address:</b>{{event_host[5]}}</div>
+                <div ><b>Status:</b><b class="text-success">{{event_host[6]}}</b></div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

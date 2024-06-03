@@ -1,0 +1,22 @@
+{% if session['role'] == 'admin' %}
+    {% include "admin_head.html" %}
+{% elif session['role'] == 'event_host' %}
+    {% include "event_host_head.html" %}
+{% elif session['role'] == 'customer' %}
+    {% include "customer_head.html" %}
+{% else %}
+    {% include "main_head.html" %}
+{% endif %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card p-5 mt-5">
+                <b class="text-center">{{message}}</b>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

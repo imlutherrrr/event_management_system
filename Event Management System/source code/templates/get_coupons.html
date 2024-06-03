@@ -1,0 +1,30 @@
+<div class="row">
+    {% for coupon in coupons %}
+    <div class="col-md-4">
+        <div class="coupon p-3 mt-5">
+            <div class="coupon_title text-center"><b>{{coupon[1]}}</b></div>
+            <div><b>Description:</b>{{coupon[2]}}</div>
+            <div><b>Validity:</b>{{coupon[3]}}</div>
+            <div><b>Discount:</b>{{coupon[4]}}%</div>
+            <div><b>Status:</b>
+                {% if coupon[5] == 'Active' %}
+                <b class="text-success">{{coupon[5]}}</b>
+                {% elif coupon[5] == 'Disabled' %}
+                <b class="text-warning">{{coupon[5]}}</b>
+                {% endif %}
+            </div>
+            <div class="row">
+                {% if coupon[5] == 'Disabled' %}
+                <div class="col-md-6 mt-3">
+                    <a href="active_coupon?coupon_id={{coupon[0]}}" class="btn btn-success w-100">Active</a>
+                </div>
+                {% elif coupon[5] == 'Active' %}
+                <div class="col-md-6 mt-3">
+                    <a href="disable_coupon?coupon_id={{coupon[0]}}" class="btn btn-danger w-100">Disable</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

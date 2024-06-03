@@ -1,0 +1,116 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+.coupon{
+    border:1px solid black;
+    border-radius:10px;
+    height:240px;
+    box-shadow: 3px 3px 3px grey;
+    background-image:linear-gradient(45deg,rgba(0, 204, 153, .2),rgba(255, 255, 255, .9),rgba(0, 204, 153, .2));
+}
+.coupon_title{
+    font-size:30px;
+    margin-bottom:30px;
+    margin-top:10px;
+}
+.event{
+    border:1px solid black;
+    box-shadow:0px 0px 10px grey;
+    border-radius:10px;
+    height:400px;
+}
+.event_type{
+    border:1px solid black;
+    box-shadow:0px 0px 7px grey;
+    border-radius:10px;
+}
+.ticket{
+    border:1px solid grey;
+    margin-left:20px;
+    margin-right:40px;
+    border-radius:10px;
+}
+
+.booking{
+    margin-top:20px;
+    border:1px solid grey;
+    border-radius:20px;
+    box-shadow:0px 0px 7px #8a8a5c;
+    height:300px;
+    background-image:linear-gradient(145deg,rgba(153, 102, 255,.2),rgba(255, 255, 255,.5),rgba(196, 77, 255,.2));
+}
+.rating{
+    border:1px solid grey;
+    padding:20px;
+    margin-top:30px;
+    border-radius:20px;
+    box-shadow:0px 0px 7px grey;
+    position:fixed;
+    left:20px;
+    top:50px;
+}
+.home{
+    margin-left:140px;
+    background-repeat:no-repeat;
+}
+.home_color{
+    background-color:	rgba(236, 229, 255, .3);
+}
+.admin_login{
+    border:1px solid grey;
+    padding:15px;
+    margin-top:40px;
+    border-radius:10px;
+    background-image:url("https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=740&t=st=1697700783~exp=1697701383~hmac=b133838e0ff4640d15623102f97c04c38450b1038eda495c16a393c410072fc3");
+    background-size:350px;
+    background-repeat:no-repeat;
+}
+.event_host_login{
+    position:fixed;
+    top:60px;
+    right:30px;
+}
+.customer_login{
+    position:fixed;
+    top:60px;
+    left:30px;
+}
+.admin_home{
+    background-image:url("https://images.unsplash.com/photo-1492551557933-34265f7af79e?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-repeat:no-repeat;
+    background-size:1365px;
+}
+.admin_home_title{
+    font-size:40px;
+    padding:20px;
+    background-color:rgba(255,255,255,.7);
+    display:inline-block;
+    margin-left:28%;
+    margin-top:100px;
+    border-radius:20px;
+}
+.event_host_registration{
+    position:fixed;
+    top:60px;
+    left:30px;
+}
+.customer_registration{
+    position:fixed;
+    top:60px;
+    left:30px;
+    background-size:100px;
+}
+.host_card{
+    border:1px solid grey;
+    border-radius:20px;
+    background-image:linear-gradient(rgba(217, 217, 217, .5),rgba(255,255,255,.9));
+    box-shadow:0px 0px 5px grey;
+}
+.customer_card{
+    border:1px solid grey;
+    border-radius:20px;
+    background-image:linear-gradient(rgba(217, 217, 217, .5),rgba(255,255,255,.9));
+    box-shadow:0px 0px 5px grey;
+}

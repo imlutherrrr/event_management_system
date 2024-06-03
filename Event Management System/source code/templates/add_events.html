@@ -1,0 +1,75 @@
+{% include "event_host_head.html" %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="card p-3 mt-5">
+                    <h4 class="h4 text-center">Add Event</h4>
+                    <form action="add_events1"  method="post" enctype="multipart/form-data">
+                        <div class="col-md-6 mt-3">
+                            <label for="place" class="form-label">Place</label>
+                            <select id="place" name = "place_id" class="form-control" required>
+                                <option selected hidden="" class="form-control">--->Choose Place<---</option>
+                                {% for place in places %}
+                                <option value="{{place[0]}}" >{{place[1]}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label for="event_type" class="form-label">Event Type</label>
+                            <select id="event_type" name = "event_type_id" class="form-control" required>
+                                <option selected hidden="">--->Choose Type<---</option>
+                                {% for event_type in event_types %}
+                                <option value="{{event_type[0]}}">{{event_type[1]}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label for="layout" class="form-label">Layout</label>
+                            <select id="layout" name = "layout" class="form-control" required>
+                                <option selected hidden="">--->Choose Type<---</option>
+                                <option value="layout">Layout</option>
+                                <option value="non_layout">Non-Layout</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label for="event_title" class="form-label">Event Title</label>
+                            <input type="text" name="event_title" id="event_title" placeholder="Enter title" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label for="event_pic" class="form-label">Event Picture</label>
+                            <input type="file" name="event_pic" id="event_pic"  class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" name="description" id="description" placeholder="Enter Description" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label for="start_date_time" class="form-label">Start DATE-TIME</label>
+                            <input type="datetime-local" name="start_date_time" id="start_date_time" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label for="end_date_time" class="form-label">End DATE-TIME</label>
+                            <input type="datetime-local" name="end_date_time" id="end_date_time" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label for="cost_per_person" class="form-label">Ticket Price(per person)</label>
+                            <input type="text" name="cost_per_person" id="cost_per_person" placeholder="Enter Price" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label for="number_of_tickets" class="form-label">Number Of Tickets</label>
+                            <input type="number" name="number_of_tickets" id="number_of_tickets" placeholder="Enter Number" class="form-control" required>
+                        </div>
+                        <div class="col-md-12 mt-5">
+                            <input type="submit" id="btn" value="Add Event" class="btn btn-primary w-100">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+

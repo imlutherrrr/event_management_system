@@ -1,0 +1,100 @@
+{% include "main_head.html" %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img class="event_host_registration" src="https://img.freepik.com/free-vector/cloud-computing-security-abstract-concept-illustration_335657-2105.jpg?w=740&t=st=1697700669~exp=1697701269~hmac=f48dde6908d6c25d09190249297726620f81b1a85f74dbb4d1ba8b51626e7f89">
+        </div>
+        <div class="col-md-6 ">
+            <div class="card p-3 mt-5">
+                <form action="event_host_registration1" method="post" enctype="multipart/form-data" id="myform">
+                    <h4 class="text-center">EVENT HOST REGISTRATION</h4>
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" name="name" id="name" placeholder="Enter Name" class="form-control" required>
+                            <label id="name_message" style="font-size:10px;color:red;"></label>
+                        </div>
+                        <div class="col-md-6 ">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" id="email" placeholder="Enter Email" class="form-control" required>
+                            <label id="email_message" style="font-size:10px;color:red;"></label>
+                        </div>
+                        <div class="col-md-6 ">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="tel" name="phone" id="phone" placeholder="Enter Phone" class="form-control" required>
+                            <label id="phone_message" style="font-size:10px;color:red;"></label>
+                        </div>
+                        <div class="col-md-6 ">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" name="password" id="password" placeholder="Enter Password" class="form-control" required>
+                            <label id="password_message" style="font-size:10px;color:red;"></label>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" name="address" id="address" placeholder="Enter Address" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="picture">Profile Picture</label>
+                            <input type="file" name="picture" id="picture" class="form-control" required>
+                        </div>
+                        <div class=" col-md-12 mt-4">
+                            <input type="submit" value="Register" id="btn"  class="btn btn-primary w-100 " >
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    let myform = document.getElementById("myform");
+    myform.addEventListener("submit",validate)
+
+
+    function validate(e){
+
+        let letters = /^[A-Za-z]+$/;
+        let name = document.getElementById("name").value;
+        if(name.length<4){
+            document.getElementById("name_message").innerText = "Name should contain minimum 4 characters"
+            e.preventDefault();
+        }else if(!name.match(letters)){
+            document.getElementById("name_message").innerText = "name should contain only alphabets"
+            e.preventDefault();
+        }else{
+            document.getElementById("name_message").innerText = ""
+        }
+
+        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        let email = document.getElementById("email").value;
+        if(!email.match(mailformat)){
+            document.getElementById("email_message").innerText = "invalid email"
+            e.preventDefault();
+        }else{
+            document.getElementById("email_message").innerText = ""
+        }
+
+        let phoneno = /^\d{10}$/;
+        let phone = document.getElementById("phone").value;
+        if(!phone.match(phoneno)){
+            document.getElementById("phone_message").innerText = "phone number length should be 10"
+            e.preventDefault();
+        }else{
+            document.getElementById("phone_message").innerText = ""
+        }
+
+
+        let password_format = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+        let password = document.getElementById("password").value;
+        if(!password.match(password_format)){
+            document.getElementById("password_message").innerText = "min 8 letter password, with at least a symbol, upper and lower case letters and a number";
+            e.preventDefault();
+        }else{
+            document.getElementById("password_message").innerText = ""
+        }
+
+    }
+</script>

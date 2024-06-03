@@ -1,0 +1,25 @@
+{% include "main_head.html" %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="admin_login p-4 mt-5">
+                <form action="admin_login1" method="post" class="form-group">
+                    <h4 class="text-center">ADMIN LOGIN</h4>
+                    <div class="mt-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" id="username" placeholder="Enter Username" class="form-control" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" id="password" placeholder="Enter Password" class="form-control" required>
+                    </div>
+                    <div class="mt-3">
+                        <input type="submit" value="LOGIN" id="btn"  class="btn btn-primary w-100" >
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

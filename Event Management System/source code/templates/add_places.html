@@ -1,0 +1,72 @@
+{% include "admin_head.html" %}
+<script>
+    $(document).ready(function(){
+        get_places();
+    })
+    function get_places(){
+        let url = "http://127.0.0.1:5000/get_places"
+        $.get(url,function(data,status){
+            $("#places").html(data);
+        })
+    }
+    function add_places(){
+        let name = $("#name").val();
+        let address = $("#address").val();
+        let place_json={
+            "name":name,
+            "address":address
+        }
+
+        $.post("http://127.0.0.1:5000/add_places1",place_json,function(data,status){
+            alert(data['message'])
+            $("#name").val();
+            $("#address").val();
+            get_places();
+        })
+        return false
+    }
+</script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            <div class="card p-3 mt-5">
+                <form action="add_places1" method="post" onsubmit="return add_places()">
+                    <h4 class="text-center">ADD PLACES</h4>
+                    <div class="mt-3">
+                        <label for="name" class="form-label">Location Name</label>
+                        <input type="text" name="name" id="name" placeholder="Enter Name" class="form-control" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" name="address" id="address" placeholder="Enter Address" class="form-control" required>
+                    </div>
+                    <div class="mt-3">
+                        <input type="submit" value="Add Place" id="btn" class="btn btn-primary w-100">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <table class="table table-bordered mt-5">
+                        <thead>
+                            <tr>
+                                <th>Location Name</th>
+                                <th>Address</th>
+                            </tr>
+                        </thead>
+                        <tbody id="places">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

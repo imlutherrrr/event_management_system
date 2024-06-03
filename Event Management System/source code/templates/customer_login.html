@@ -1,0 +1,27 @@
+{% include "main_head.html" %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <img class="customer_login" src="https://img.freepik.com/free-vector/stay-home-abstract-concept-vector-illustration-forced-isolation-covid19-outbreak-prevention-measures-social-distance-governmental-support-self-protection-wear-mask-abstract-metaphor_335657-6164.jpg?w=740&t=st=1697694901~exp=1697695501~hmac=1d2a430807cb7f73fba194627c85e811a63d01b634fbc950e94375cbe8ea1c68">
+        </div>
+        <div class="col-md-4">
+            <div class="card p-4 mt-5">
+                <form class="form-group" action="customer_login1" method="post">
+                    <h4 class="text-center">CUSTOMER LOGIN</h4>
+                    <div class="mt-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Enter Email" class="form-control" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" id="password" placeholder="Enter Password" class="form-control" required>
+                    </div>
+                    <div class="mt-3">
+                        <input type="submit" value="LOGIN" id="btn"  class="btn btn-primary w-100" >
+                    </div>
+                </form>
+            </div>
+            <h5 class="text-center">New customer?<a href="/customer_registration">Register Here</a></h5>
+        </div>
+    </div>
+</div>
